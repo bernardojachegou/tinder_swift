@@ -30,14 +30,29 @@ class CombineVC: UIViewController {
     navigationController?.navigationBar.isHidden = true
     view.backgroundColor = UIColor.systemGroupedBackground
     
+    let loading = Loading(frame: view.frame)
+    view.insertSubview(loading, at: 0)
+    
     self.addHeader()
     self.addFooter()
     self.searchUsers()
   }
   
   func searchUsers() {
-    self.users = UserService.shared.searchUsers()
-    self.addCards()
+//    self.users = UserService.shared.searchUsers()
+//    self.addCards()
+    
+    UserService.shared.searchUsers { (users, err) in
+      if let users = users {
+        
+        DispatchQueue.main.async {
+          self.users = users
+          self.addCards()
+        }
+        
+      }
+    }
+    
   }
   
 }
@@ -97,7 +112,7 @@ extension CombineVC {
       
       card.addGestureRecognizer(gesture)
       
-      view.insertSubview(card, at: 0)
+      view.insertSubview(card, at: 1)
     }
   }
   func removeCard(card: UIView) {
@@ -110,6 +125,12 @@ extension CombineVC {
   func matchChecker(user: User) {
     if user.match {
       print("Matched")
+      
+      let matchVC = MatchVC()
+      matchVC.modalPresentationStyle = .fullScreen
+      
+      self.present(matchVC, animated: true, completion: nil)
+      
     }
   }
 }

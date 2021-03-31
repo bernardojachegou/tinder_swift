@@ -21,6 +21,8 @@
 		99519D82261400AB00AC2A3D /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99519D81261400AB00AC2A3D /* UserService.swift */; };
 		9973865226148E1E006B39EE /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9973865126148E1E006B39EE /* UIImageView.swift */; };
 		997386562614AAFA006B39EE /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997386552614AAFA006B39EE /* UIButton.swift */; };
+		997386592614F55E006B39EE /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 997386582614F55E006B39EE /* Loading.swift */; };
+		9973865C261500E1006B39EE /* MatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9973865B261500E1006B39EE /* MatchVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		99519D81261400AB00AC2A3D /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		9973865126148E1E006B39EE /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		997386552614AAFA006B39EE /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		997386582614F55E006B39EE /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
+		9973865B261500E1006B39EE /* MatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				99519D6D2613F09800AC2A3D /* CombineVC.swift */,
+				9973865B261500E1006B39EE /* MatchVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -101,6 +106,7 @@
 			children = (
 				99519D722613F66B00AC2A3D /* CombineCardView.swift */,
 				9973865126148E1E006B39EE /* UIImageView.swift */,
+				997386582614F55E006B39EE /* Loading.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -211,6 +217,8 @@
 				99519D582613F02600AC2A3D /* AppDelegate.swift in Sources */,
 				997386562614AAFA006B39EE /* UIButton.swift in Sources */,
 				99519D772613F88F00AC2A3D /* UIView.swift in Sources */,
+				9973865C261500E1006B39EE /* MatchVC.swift in Sources */,
+				997386592614F55E006B39EE /* Loading.swift in Sources */,
 				99519D5A2613F02600AC2A3D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
