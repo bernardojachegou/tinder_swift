@@ -9,6 +9,7 @@ import UIKit
 
 enum Action {
   case deslike
+  case superlike
   case like
 }
 
@@ -17,7 +18,6 @@ class CombineVC: UIViewController {
   var profileButton: UIButton = .iconMenu(named: "icone-perfil")
   var chatButton: UIButton = .iconMenu(named: "icone-chat")
   var logoButton: UIButton = .iconMenu(named: "icone-logo")
-  
   var deslikeButton: UIButton = .iconFooter(named: "icone-deslike")
   var superlikeButton: UIButton = .iconFooter(named: "icone-superlike")
   var likeButton: UIButton = .iconFooter(named: "icone-like")
@@ -73,6 +73,10 @@ extension CombineVC {
       bottom: view.bottomAnchor,
       padding: .init(top: 0, left: 16, bottom: 32, right: 16)
     )
+    
+    deslikeButton.addTarget(self, action: #selector(deslikeClick), for: .touchUpInside)
+    superlikeButton.addTarget(self, action: #selector(superlikeClick), for: .touchUpInside)
+    likeButton.addTarget(self, action: #selector(likeClick), for: .touchUpInside)
   }
 }
 
@@ -96,7 +100,6 @@ extension CombineVC {
       view.insertSubview(card, at: 0)
     }
   }
-  
   func removeCard(card: UIView) {
     card.removeFromSuperview()
     
@@ -104,7 +107,11 @@ extension CombineVC {
       return user.id != card.tag
     })
   }
-  
+  func matchChecker(user: User) {
+    if user.match {
+      print("Matched")
+    }
+  }
 }
 
 // move the card;
@@ -151,6 +158,18 @@ extension CombineVC {
     }
   }
   
+  @objc func deslikeClick() {
+    self.cardAnimation(rotationAngle: -0.4, action: .deslike)
+  }
+  
+  @objc func superlikeClick() {
+    self.cardAnimation(rotationAngle: 0, action: .superlike)
+  }
+  
+  @objc func likeClick() {
+    self.cardAnimation(rotationAngle: 0.4, action: .like)
+  }
+  
   func cardAnimation(rotationAngle: CGFloat, action: Action) {
     if let user = self.users.first {
       for view in self.view.subviews {
@@ -158,26 +177,41 @@ extension CombineVC {
           if let card = view as? CombineCardView {
             
             let center: CGPoint
+            var like: Bool
             
             switch action {
             case .deslike:
               center = CGPoint(x: card.center.x - self.view.bounds.width, y: card.center.y + 50)
+              like = false
+            case .superlike:
+              center = CGPoint(x: card.center.x, y: card.center.y - self.view.bounds.height)
+              like = true
             case .like:
               center = CGPoint(x: card.center.x + self.view.bounds.width, y: card.center.y + 50)
+              like = true
             }
             
-//            UIView.animate(withDuration: 0.2) {
-//              card.center = center
-//              card.transform = CGAffineTransform(rotationAngle: rotationAngle)
-//            }
+            //            UIView.animate(withDuration: 0.2) {
+            //              card.center = center
+            //              card.transform = CGAffineTransform(rotationAngle: rotationAngle)
+            //            }
             
-            UIView.animate(withDuration: 0.2) {
+            UIView.animate(withDuration: 0.5) {
               card.center = center
               card.transform = CGAffineTransform(rotationAngle: rotationAngle)
+              
+              card.deslikeImageView.alpha = like == false ? 1 : 0
+              card.likeImageView.alpha = like == true ? 1 : 0
+              
             } completion: { (in) in
+              
+              if like {
+                self.matchChecker(user: user)
+              }
+              
               self.removeCard(card: card)
             }
-
+            
             
           }
         }
