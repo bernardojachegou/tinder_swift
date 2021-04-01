@@ -12,7 +12,7 @@ class Loading: UIView {
   let loadingView: UIView = {
     let load = UIView()
     load.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-    load.backgroundColor = UIColor(red: 218/55, green: 99/255, blue: 111/255, alpha: 1)
+    load.backgroundColor = UIColor(red: 218/255, green: 99/255, blue: 111/255, alpha: 1)
     load.layer.cornerRadius = 50
     load.layer.borderWidth = 1
     load.layer.borderColor = UIColor.red.cgColor
