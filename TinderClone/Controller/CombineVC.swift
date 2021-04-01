@@ -107,6 +107,10 @@ extension CombineVC {
       card.user = user
       card.tag = user.id
       
+      card.callback = {(data) in
+        self.seeUserDetails(user: data)
+      }
+      
       let gesture = UIPanGestureRecognizer()
       gesture.addTarget(self, action: #selector(handlerCard))
       
@@ -133,6 +137,23 @@ extension CombineVC {
       self.present(matchVC, animated: true, completion: nil)
       
     }
+  }
+  func seeUserDetails(user: User) {
+    let userDetailsVC = UserDetailsVC()
+    userDetailsVC.user = user
+    userDetailsVC.modalPresentationStyle = .fullScreen
+    
+    userDetailsVC.callback = {(user, action) in
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        if action == .deslike {
+          self.deslikeClick()
+        } else {
+          self.likeClick()
+        }
+      }
+    }
+    
+    self.present(userDetailsVC, animated: true, completion: nil)
   }
 }
 
