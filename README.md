@@ -6,14 +6,14 @@
   <img alt="UI Tinder" src="https://imgur.com/ABYzj7c.png" width="400px"/>
 </h2>
 
-## :book:    About the project
+## :book: About the project
 <p>
 Created in 04/2021.
 
 This project was created to study Swift development using UIKit (Swift 5/iOS 13). It's part of my path inside the DB1 Global Software integration.
 </p>
 
-## :iphone:    Tecnologias e ferramentas:
+## :iphone: Tools
 
 <ul>
   <li>UIKit</li>
@@ -21,7 +21,7 @@ This project was created to study Swift development using UIKit (Swift 5/iOS 13)
   <li>XCode 12+</li>
 </ul>
 
-## :computer:    Running the project:
+## :computer: Running the project
 
 ```bash
 # Clone this repository
