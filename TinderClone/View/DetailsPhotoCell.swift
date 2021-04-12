@@ -8,9 +8,7 @@
 import UIKit
 
 class DetailsPhotoCell: UICollectionViewCell {
-  
   let descriptionLabel: UILabel = .textBoldLabel(16)
-  
   let photosSlideVC = PhotosSlideVC()
   
   override init(frame: CGRect) {

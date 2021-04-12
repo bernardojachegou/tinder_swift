@@ -35,12 +35,11 @@ class UserService {
   ]
   
   
-  // async with callback function
+  // async function with a callback
   func searchUsers(completion: @escaping ([User]?, Error?) -> ())  {
-    
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
       completion(self.users, nil)
     }
-
+    
   }
 }

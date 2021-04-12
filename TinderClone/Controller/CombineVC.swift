@@ -21,7 +21,6 @@ class CombineVC: UIViewController {
   var deslikeButton: UIButton = .iconFooter(named: "icone-deslike")
   var superlikeButton: UIButton = .iconFooter(named: "icone-superlike")
   var likeButton: UIButton = .iconFooter(named: "icone-like")
-  
   var users: [User] = []
   
   override func viewDidLoad() {
@@ -39,12 +38,8 @@ class CombineVC: UIViewController {
   }
   
   func searchUsers() {
-//    self.users = UserService.shared.searchUsers()
-//    self.addCards()
-    
     UserService.shared.searchUsers { (users, err) in
       if let users = users {
-        
         DispatchQueue.main.async {
           self.users = users
           self.addCards()
@@ -59,10 +54,8 @@ class CombineVC: UIViewController {
 
 extension CombineVC {
   func addHeader() {
-    
     let window = UIApplication.shared.windows.first { $0.isKeyWindow }
     let top: CGFloat = window?.safeAreaInsets.top ?? 44
-    
     let stackView = UIStackView(arrangedSubviews: [profileButton, logoButton, chatButton])
     stackView.distribution = .equalCentering
     
@@ -79,7 +72,6 @@ extension CombineVC {
   func addFooter() {
     let stackView = UIStackView(arrangedSubviews: [UIView(), deslikeButton, superlikeButton, likeButton, UIView()])
     stackView.distribution = .equalCentering
-    
     view.addSubview(stackView)
     stackView.fullfill(
       top: nil,
@@ -95,54 +87,45 @@ extension CombineVC {
   }
 }
 
-// multiple cards;
 extension CombineVC {
   func addCards() {
-    
     for user in users {
       let card = CombineCardView()
       card.frame = CGRect(x: 0, y: 0, width: view.bounds.width - 32, height: view.bounds.height * 0.7)
-      
       card.center = view.center
       card.user = user
       card.tag = user.id
-      
       card.callback = {(data) in
         self.seeUserDetails(user: data)
       }
-      
       let gesture = UIPanGestureRecognizer()
       gesture.addTarget(self, action: #selector(handlerCard))
-      
       card.addGestureRecognizer(gesture)
-      
       view.insertSubview(card, at: 1)
     }
   }
+  
   func removeCard(card: UIView) {
     card.removeFromSuperview()
-    
     self.users = self.users.filter({ (user) -> Bool in
       return user.id != card.tag
     })
   }
+  
   func matchChecker(user: User) {
     if user.match {
       print("Matched")
-      
       let matchVC = MatchVC()
       matchVC.user = user
       matchVC.modalPresentationStyle = .fullScreen
-      
       self.present(matchVC, animated: true, completion: nil)
-      
     }
   }
+  
   func seeUserDetails(user: User) {
     let userDetailsVC = UserDetailsVC()
     userDetailsVC.user = user
     userDetailsVC.modalPresentationStyle = .fullScreen
-    
     userDetailsVC.callback = {(user, action) in
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
         if action == .deslike {
@@ -152,19 +135,16 @@ extension CombineVC {
         }
       }
     }
-    
     self.present(userDetailsVC, animated: true, completion: nil)
   }
 }
 
-// move the card;
 extension CombineVC {
   @objc func handlerCard (_ gesture: UIPanGestureRecognizer) {
     if let card = gesture.view as? CombineCardView {
+      
       let point = gesture.translation(in: view)
-      
       card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
-      
       let rotationAngle = point.x / view.bounds.width * 0.5
       
       if point.x > 0 {
@@ -178,7 +158,6 @@ extension CombineVC {
       card.transform = CGAffineTransform(rotationAngle: rotationAngle)
       
       if gesture.state == .ended {
-        
         if card.center.x > self.view.bounds.width + 30 {
           self.cardAnimation(rotationAngle: rotationAngle, action: .like)
           return
@@ -192,10 +171,8 @@ extension CombineVC {
         UIView.animate(withDuration: 0.3) {
           card.center = self.view.center
           card.transform = .identity
-          
           card.likeImageView.alpha = 0
           card.deslikeImageView.alpha = 0
-          
         }
       }
     }
@@ -234,15 +211,9 @@ extension CombineVC {
               like = true
             }
             
-            //            UIView.animate(withDuration: 0.2) {
-            //              card.center = center
-            //              card.transform = CGAffineTransform(rotationAngle: rotationAngle)
-            //            }
-            
             UIView.animate(withDuration: 0.5) {
               card.center = center
               card.transform = CGAffineTransform(rotationAngle: rotationAngle)
-              
               card.deslikeImageView.alpha = like == false ? 1 : 0
               card.likeImageView.alpha = like == true ? 1 : 0
               
@@ -251,11 +222,8 @@ extension CombineVC {
               if like {
                 self.matchChecker(user: user)
               }
-              
               self.removeCard(card: card)
             }
-            
-            
           }
         }
       }

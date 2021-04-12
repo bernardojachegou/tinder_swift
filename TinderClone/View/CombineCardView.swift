@@ -21,17 +21,15 @@ class CombineCardView: UIView {
   }
   
   let photoImageView: UIImageView = .photoImageView()
-  
   let nameLabel: UILabel = .textBoldLabel(32, textColor: .white)
   let ageLabel: UILabel = .textLabel(28, textColor: .white)
   let phraseLabel: UILabel = .textLabel(18, textColor: .white, numberOfLines: 2)
-  
   let deslikeImageView: UIImageView = .iconCard(named: "card-deslike")
   let likeImageView: UIImageView = .iconCard(named: "card-like")
-  
   var callback: ((User) -> Void)?
   
   override init(frame: CGRect) {
+    
     super.init(frame: frame)
     
     layer.borderWidth = 0.3

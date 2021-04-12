@@ -24,7 +24,6 @@ class MatchVC: UIViewController, UITextFieldDelegate {
   
   let messageText: UITextField = {
     let textField = UITextField()
-    
     textField.translatesAutoresizingMaskIntoConstraints = false
     textField.heightAnchor.constraint(equalToConstant: 44).isActive = true
     textField.placeholder = "Say hi..." // Add person's name
@@ -32,41 +31,32 @@ class MatchVC: UIViewController, UITextFieldDelegate {
     textField.layer.cornerRadius = 8
     textField.textColor = .darkText
     textField.returnKeyType = .go
-    
     textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 16, height: 0))
     textField.leftViewMode = .always
-    
     textField.rightView = UIView(frame: CGRect(x: 0, y: 0, width: 90, height: 0))
     textField.rightViewMode = .always
-    
     return textField
   }()
   
   let sendMessageButton: UIButton = {
     let button = UIButton()
-    
     button.setTitle("Send", for: .normal)
     button.setTitleColor(UIColor(red: 62/255, green: 163/255, blue: 255/255, alpha: 1), for: .normal)
     button.titleLabel?.font = .boldSystemFont(ofSize: 16)
-    
     return button
   }()
   
   let backButton: UIButton = {
     let button = UIButton()
-    
     button.setTitle("Back", for: .normal)
     button.setTitleColor(.white, for: .normal)
     button.titleLabel?.font = .systemFont(ofSize: 16)
-    
     return button
   }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-    
     NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     
     view.addSubview(photoImageView)
@@ -77,13 +67,9 @@ class MatchVC: UIViewController, UITextFieldDelegate {
     gradient.colors = [UIColor.clear.cgColor, UIColor.clear.cgColor, UIColor.black.cgColor]
     
     photoImageView.layer.addSublayer(gradient)
-    
     messageText.delegate = self
-    
     messageLabel.textAlignment = .center
-    
     backButton.addTarget(self, action: #selector(backClick), for: .touchUpInside)
-    
     likeImageView.translatesAutoresizingMaskIntoConstraints = false
     likeImageView.heightAnchor.constraint(equalToConstant: 44).isActive = true
     likeImageView.contentMode = .scaleAspectFit
@@ -136,7 +122,6 @@ class MatchVC: UIViewController, UITextFieldDelegate {
   @objc func keyboardShow(notification: NSNotification) {
     if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
       if let keyboardDelay = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
-        
         UIView.animate(withDuration: keyboardDelay) {
           self.view.frame = CGRect(
             x: UIScreen.main.bounds.origin.x,

@@ -8,7 +8,6 @@
 import UIKit
 
 class PhotosSlideCell: UICollectionViewCell {
-  
   var photoImageView: UIImageView = .photoImageView()
   
   override init(frame: CGRect) {

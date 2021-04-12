@@ -8,7 +8,6 @@
 import UIKit
 
 class DetailHeaderView: UICollectionReusableView {
-  
   var user: User? {
     didSet {
       if let user = user {

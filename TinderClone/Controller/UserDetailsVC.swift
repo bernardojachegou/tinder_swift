@@ -24,9 +24,8 @@ class HeaderLayout: UICollectionViewFlowLayout {
           height: attribute.bounds.height - contentOffSetY
         )
       }
+      
     })
-    
-    
     return layoutAttributes
   }
   
@@ -51,7 +50,6 @@ class UserDetailsVC: UICollectionViewController, UICollectionViewDelegateFlowLay
   
   var deslikeButton: UIButton = .iconFooter(named: "icone-deslike")
   var likeButton: UIButton = .iconFooter(named: "icone-like")
-  
   var theBackButton: UIButton = {
     let button = UIButton()
     button.setImage(UIImage(named: "icone-down"), for: .normal)
@@ -59,7 +57,6 @@ class UserDetailsVC: UICollectionViewController, UICollectionViewDelegateFlowLay
     button.clipsToBounds = true
     return button
   }()
-  
   var callback: ((User?, Action) -> Void)?
   
   init () {
@@ -71,14 +68,13 @@ class UserDetailsVC: UICollectionViewController, UICollectionViewDelegateFlowLay
   }
   
   override func viewDidLoad() {
+    
     super.viewDidLoad()
     
     collectionView.contentInsetAdjustmentBehavior = .never
     collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 132, right: 0)
-    
     collectionView.backgroundColor = .white
     collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-    
     collectionView.register(DetailHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
     collectionView.register(DetailsInProfileCell.self, forCellWithReuseIdentifier: profileId)
     collectionView.register(DetailsPhotoCell.self, forCellWithReuseIdentifier: photosId)
@@ -88,13 +84,13 @@ class UserDetailsVC: UICollectionViewController, UICollectionViewDelegateFlowLay
   }
   
   func addBackButton() {
-//    view.addSubview(theBackButton)
-//    theBackButton.frame = CGRect(
-//      x: view.bounds.width - 69,
-//      y: view.bounds.height * 0.7,
-//      width: 48,
-//      height: 48
-//    )
+    //    view.addSubview(theBackButton)
+    //    theBackButton.frame = CGRect(
+    //      x: view.bounds.width - 69,
+    //      y: view.bounds.height * 0.7,
+    //      width: 48,
+    //      height: 48
+    //    )
     
     view.addSubview(theBackButton)
     theBackButton.frame = CGRect(
@@ -103,7 +99,6 @@ class UserDetailsVC: UICollectionViewController, UICollectionViewDelegateFlowLay
       width: 48,
       height: 48
     )
-    
     theBackButton.layer.cornerRadius = 24
     theBackButton.addTarget(self, action: #selector(goBackClick), for: .touchUpInside)
   }
@@ -131,7 +126,6 @@ class UserDetailsVC: UICollectionViewController, UICollectionViewDelegateFlowLay
   }
   
   // header
-  
   override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
     let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! DetailHeaderView
     header.user = self.user
@@ -143,16 +137,11 @@ class UserDetailsVC: UICollectionViewController, UICollectionViewDelegateFlowLay
   }
   
   // footer
-  
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    //    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-    //    cell.backgroundColor = .yellow
-    //    return cell
     
     if indexPath.item == 0 {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: profileId, for: indexPath) as! DetailsInProfileCell
       cell.user = self.user
-      
       return cell
     }
     
@@ -179,7 +168,6 @@ class UserDetailsVC: UICollectionViewController, UICollectionViewDelegateFlowLay
   }
   
   override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    
     let originY = view.bounds.height + 625
     
     if scrollView.contentOffset.y > 0 {

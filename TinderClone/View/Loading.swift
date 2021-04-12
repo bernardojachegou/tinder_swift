@@ -31,6 +31,7 @@ class Loading: UIView {
   }()
   
   override init(frame: CGRect) {
+    
     super.init(frame: frame)
     
     addSubview(loadingView)
@@ -48,19 +49,15 @@ class Loading: UIView {
   
   func loadAnimation() {
     UIView.animate(withDuration: 1.3, animations: {
-      
       self.loadingView.frame = CGRect(x: 0, y: 0, width: 250, height: 250)
       self.loadingView.center = self.center
       self.loadingView.layer.cornerRadius = 125
       self.loadingView.alpha = 0.3
-      
     }) { (_) in
-     
       self.loadingView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
       self.loadingView.center = self.center
       self.loadingView.layer.cornerRadius = 50
       self.loadingView.alpha = 1
-      
       self.loadAnimation()
     }
   }

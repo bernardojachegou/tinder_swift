@@ -32,7 +32,6 @@ class DetailsInProfileCell: UICollectionViewCell {
     let stackView = UIStackView(arrangedSubviews: [nameAndAgeStackView, phraseLabel])
     stackView.distribution = .fillEqually
     stackView.axis = .vertical
-    
     addSubview(stackView)
     stackView.fillSuperview(padding: .init(top: 20, left: 20, bottom: 20, right: 20))
   }
